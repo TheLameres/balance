@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: server-local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/balance
+    username: postgres
+    password: password

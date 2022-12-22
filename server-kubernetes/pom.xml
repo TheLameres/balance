@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>thelameres</groupId>
+        <artifactId>balance</artifactId>
+        <version>1.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>thelameres.balance</groupId>
+    <artifactId>server-kubernetes</artifactId>
+
+    <properties>
+        <jkube.generator.name>${spring-boot.build-image.imageName}</jkube.generator.name>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>bom</artifactId>
+                <version>${parent.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>server-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-kubernetes-fabric8-all</artifactId>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jkube</groupId>
+                <artifactId>kubernetes-maven-plugin</artifactId>
+                <version>${jkube.kubernetes.version}</version>
+                <configuration>
+                    <resources>
+                        <serviceAccounts>
+                            <serviceAccount>
+                                <name>${project.artifactId}</name>
+                                <deploymentRef>${project.artifactId}</deploymentRef>
+                            </serviceAccount>
+                        </serviceAccounts>
+                    </resources>
+                    <enricher>
+                        <config>
+                            <jkube-prometheus>
+                                <prometheusPort>8080</prometheusPort>
+                                <prometheusPath>/actuator/prometheus</prometheusPath>
+                            </jkube-prometheus>
+                        </config>
+                    </enricher>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

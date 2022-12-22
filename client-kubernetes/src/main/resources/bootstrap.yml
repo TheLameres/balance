@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: client-kubernetes
+  cloud:
+    kubernetes:
+      config:
+        name: ${spring.application.name}

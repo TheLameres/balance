@@ -1,0 +1,6 @@
+metadata:
+  name: ${project.artifactId}
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "configmaps", "pods", "services", "endpoints", "secrets" ]
+    verbs: [ "get", "list", "watch" ]
