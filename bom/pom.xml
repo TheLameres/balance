@@ -31,6 +31,14 @@
                 <type>pom</type>
             </dependency>
 
+            <dependency>
+                <groupId>com.playtika.testcontainers</groupId>
+                <artifactId>testcontainers-spring-boot-bom</artifactId>
+                <version>${testcontainers-spring-boot.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
 
             <dependency>
                 <groupId>thelameres.balance</groupId>

@@ -4,4 +4,15 @@ spring:
   cloud:
     kubernetes:
       config:
-        name: ${spring.application.name}
+        sources:
+          - name: ${spring.application.name}
+      secrets:
+        enable-api: true
+        sources:
+          - name: ${spring.application.name}
+      reload:
+        enabled: true
+        strategy: restart_context
+        mode: POLLING
+        period: 15s
+        monitoring-secrets: true
