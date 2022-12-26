@@ -57,9 +57,7 @@ public class BalanceServerInternalServiceImpl implements BalanceServerInternalSe
 
     @Override
     public Optional<BalanceDto> changeBalance(Long id, AmountDto amountDto) {
-        return                 this.changeBalance(new BalanceDto(id, amountDto.amount()))
-
-        ;
+        return this.changeBalance(new BalanceDto(id, amountDto.amount()));
     }
 
     @Override
